@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>FIGURA 3D TAREA CG</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="js/three.js"></script>
+		<script>
+      var renderer;
+      var scene;
+      var camera;
+      
+      init();
+      
+      function init() {
+        // Creación escena
+
+        scene = new THREE.Scene();
+
+        // Crear camera
+
+        camera = new THREE.PerspectiveCamera(
+          60,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000
+        );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0x000000, 1.0);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000,1);
+        
+    
+
+        document.body.appendChild(renderer.domElement);
+        
+        
+        var cubeGeometry = new THREE.BoxGeometry(2, 2, 2);
+        var cubeMaterial = new THREE.MeshNormalMaterial({color: 0xffffff});
+        
+        var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        
+        
+        //Position camera 
+                                
+        camera.position.x =20   
+        camera.position.y = 15
+        camera.position.z = 4;
+        camera.lookAt(scene.position);
+          
+          
+        var cylinderGeometry = new THREE.CylinderGeometry(2, 2, 2, 28, 2 )
+        var cylinderMaterial = new THREE.MeshNormalMaterial({wireframe:true});
+        var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial)
+        cylinder.translateZ(5);
+       
+        scene.add(cube,cylinder);
+        
+
+        render();
+      }
+
+      function render() {
+        
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+      }
+            
+            
+		</script>
+	</body>
+</html>
